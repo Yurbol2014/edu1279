@@ -60,3 +60,7 @@ body{
         width:100%;
         z-index:100;
       }
+      img[src$='cup.png']{
+        width:160px;
+        opacity: 0;
+      }
