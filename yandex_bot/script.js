@@ -9,8 +9,8 @@
 // ==/UserScript==
 
 
-document.getElementsByName('text')[0].value = 'Гобой';
-let btn = document.getElementsByClassName('mini-suggest__button')[0];
+document.getElementById('text').value = 'Гобой';
+let btn = document.getElementsByClassName('button_theme_websearch')[0];
 if(btn != undefined){
 btn.click();
 }else{
