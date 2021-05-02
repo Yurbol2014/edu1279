@@ -6,7 +6,7 @@
 // @author       You
 // @match        https://yandex.ru/*
 // @match        https://xn----7sbab5aqcbiddtdj1e1g.xn--p1ai/*
-// @match        https://crushdrummers.ru/*
+// @match       https://napli.ru/*
 // @grant        none
 // ==/UserScript==
 function getRandom(min,max){
@@ -22,15 +22,17 @@ function getCookie(name) {
 
 let sites = {
     "xn----7sbab5aqcbiddtdj1e1g.xn--p1ai":["Гобой","Саксофон","Валторна","Фагот","Флейта","Как звучит флейта","Скрипка"],
-    "crushdrummers.ru":["Барабанное шоу","Шоу барабанщиков в Москве","Заказать барабанщиков в Москве"]
+    "napli.ru":['10 самых популярных шрифтов от Google',
+				'Отключение редакций и ревизий в WordPress',
+				'Вывод произвольных типов записей и полей в WordPress'],
 }
 let site = Object.keys(sites)[getRandom(0,Object.keys(sites).length)];
 let keywords = sites[site];
 let keyword = keywords[getRandom(0, keywords.length)];
 let yandexInput = document.getElementById('text');
-let btn = document.getElementsByClassName('button_theme_websearch')[0];
+let btn = document.getElementsByClassName('button_theme_search')[0];
 let links = document.links;
-if(btn != undefined){ 
+if(btn != undefined){
     let i = 0;
     document.cookie = "site="+site;
     let timerId = setInterval(()=>{
@@ -40,9 +42,9 @@ if(btn != undefined){
         btn.click();
     }
 },500);
-}else if(location.hostname == "yandex.ru"){ 
-    let flag = true; 
-    let numPage = document.getElementsByClassName("pager__item_kind_page")[0].innerHTML;
+}else if(location.hostname == "yandex.ru"){
+    let flag = true;
+    let numPage = document.getElementsByClassName(" pager__item_current_yes ")[0].innerHTML;
     site = getCookie("site");
     for(let i=0; i<links.length; i++){
         let link = links[i];
@@ -54,7 +56,7 @@ if(btn != undefined){
         }
     }
     if (numPage == "10") location.href = "https://yandex.ru/";
-    let btnNext = document.getElementsByClassName("pager__item_kind_next")[0];
+    let btnNext = document.querySelectorAll(".pager__item_kind_next")[0];
     if(flag) setTimeout(()=>btnNext.click(),2000);
 }else{
     if(getRandom(0,100)>=80) location.href = "https://yandex.ru/";
